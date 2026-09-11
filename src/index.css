@@ -1,12 +1,12 @@
 ﻿:root {
-  --brand-dark: #0b1f3a;
-  --brand-primary: #1b8a5a;
-  --brand-primary-light: #27c281;
-  --brand-accent: #ffb703;
+  --brand-dark: #0b1120;
+  --brand-primary: #14b8a6;
+  --brand-primary-light: #2dd9b9;
+  --brand-accent: #94a3b8;
   --text: #1f2430;
-  --text-muted: #5b6472;
-  --bg: #ffffff;
-  --bg-alt: #f4f8f6;
+  --text-muted: #64748b;
+  --bg: #f8fafc;
+  --bg-alt: #eef2f7;
   --border: #e2e8f0;
   --sans: "Segoe UI", system-ui, Roboto, sans-serif;
 
