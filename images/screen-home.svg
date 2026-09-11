@@ -1,24 +1,65 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
-  <rect width="400" height="400" fill="#f4f8f6" />
-  <ellipse cx="200" cy="368" rx="110" ry="14" fill="#0b1f3a" opacity="0.12" />
-  <rect x="120" y="24" width="160" height="336" rx="28" fill="#0b1f3a" />
-  <rect x="130" y="40" width="140" height="304" rx="18" fill="#ffffff" />
-  <rect x="170" y="48" width="60" height="8" rx="4" fill="#0b1f3a" />
-  <text x="200" y="78" font-family="Segoe UI, sans-serif" font-size="12" fill="#5b6472" text-anchor="middle">Hola, Ana</text>
-  <rect x="144" y="90" width="112" height="54" rx="12" fill="#1b8a5a" />
-  <text x="200" y="112" font-family="Segoe UI, sans-serif" font-size="10" fill="#d1fadf" text-anchor="middle">Saldo disponible</text>
-  <text x="200" y="130" font-family="Segoe UI, sans-serif" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">$850.000</text>
-  <rect x="144" y="156" width="52" height="58" rx="10" fill="#f0fdf4" stroke="#27c281" />
-  <rect x="204" y="156" width="52" height="58" rx="10" fill="#fff7e6" stroke="#ffb703" />
-  <text x="170" y="180" font-family="Segoe UI, sans-serif" font-size="9" fill="#1b8a5a" text-anchor="middle">Ahorro</text>
-  <text x="170" y="194" font-family="Segoe UI, sans-serif" font-size="11" font-weight="bold" fill="#1b8a5a" text-anchor="middle">40%</text>
-  <text x="230" y="180" font-family="Segoe UI, sans-serif" font-size="9" fill="#b8860b" text-anchor="middle">Gastos hoy</text>
-  <text x="230" y="194" font-family="Segoe UI, sans-serif" font-size="11" font-weight="bold" fill="#b8860b" text-anchor="middle">$32.000</text>
-  <text x="150" y="238" font-family="Segoe UI, sans-serif" font-size="10" fill="#1f2430" font-weight="bold">Movimientos recientes</text>
-  <rect x="144" y="248" width="112" height="30" rx="8" fill="#f4f8f6" />
-  <circle cx="158" cy="263" r="8" fill="#27c281" />
-  <text x="172" y="267" font-family="Segoe UI, sans-serif" font-size="9" fill="#1f2430">Supermercado</text>
-  <rect x="144" y="284" width="112" height="30" rx="8" fill="#f4f8f6" />
-  <circle cx="158" cy="299" r="8" fill="#ffb703" />
-  <text x="172" y="303" font-family="Segoe UI, sans-serif" font-size="9" fill="#1f2430">Transporte</text>
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 480" width="240" height="480">
+  <defs>
+    <linearGradient id="hdr" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1f3a"/>
+      <stop offset="1" stop-color="#1b8a5a"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0b1f3a" flood-opacity="0.18"/>
+    </filter>
+    <clipPath id="clip"><rect x="16" y="24" width="208" height="416" rx="28"/></clipPath>
+  </defs>
+  <rect width="240" height="480" fill="#ffffff"/>
+  <ellipse cx="120" cy="468" rx="86" ry="10" fill="#0b1f3a" opacity="0.12"/>
+  <rect x="8" y="8" width="224" height="464" rx="36" fill="#0b1f3a"/>
+  <rect x="98" y="13" width="44" height="6" rx="3" fill="#12294d"/>
+  <rect x="95" y="453" width="50" height="5" rx="2.5" fill="#12294d"/>
+  <g clip-path="url(#clip)">
+    <rect x="16" y="24" width="208" height="416" fill="#ffffff"/>
+    <text x="32" y="46" font-family="Segoe UI, sans-serif" font-size="9" font-weight="bold" fill="#0b1f3a">9:41</text>
+    <rect x="196" y="38" width="16" height="8" rx="2" fill="none" stroke="#0b1f3a" stroke-width="1"/>
+    <rect x="197.5" y="39.5" width="11" height="5" fill="#1b8a5a"/>
+    <rect x="213" y="40.5" width="1.5" height="3" fill="#0b1f3a"/>
+    <rect x="16" y="56" width="208" height="86" fill="url(#hdr)"/>
+    <circle cx="204" cy="80" r="13" fill="#ffffff" opacity="0.18"/>
+    <text x="204" y="84" font-family="Segoe UI, sans-serif" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">A</text>
+    <text x="32" y="80" font-family="Segoe UI, sans-serif" font-size="10" fill="#ffffff" opacity="0.85">Hola, Ana</text>
+    <text x="32" y="104" font-family="Segoe UI, sans-serif" font-size="8" fill="#ffffff" opacity="0.7">Saldo disponible</text>
+    <text x="32" y="126" font-family="Segoe UI, sans-serif" font-size="19" font-weight="bold" fill="#ffffff">$850.000</text>
+    <rect x="28" y="128" width="88" height="48" rx="14" fill="#ffffff" filter="url(#shadow)"/>
+    <circle cx="48" cy="144" r="8" fill="none" stroke="#1b8a5a" stroke-width="2.5" stroke-dasharray="14 20"/>
+    <text x="62" y="147" font-family="Segoe UI, sans-serif" font-size="7" fill="#5b6472">Ahorro</text>
+    <text x="62" y="161" font-family="Segoe UI, sans-serif" font-size="12" font-weight="bold" fill="#1b8a5a">40%</text>
+    <rect x="124" y="128" width="88" height="48" rx="14" fill="#ffffff" filter="url(#shadow)"/>
+    <path d="M138 150 L144 142 L149 146 L156 136" stroke="#b8860b" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="158" y="147" font-family="Segoe UI, sans-serif" font-size="7" fill="#5b6472">Gastos hoy</text>
+    <text x="158" y="161" font-family="Segoe UI, sans-serif" font-size="11" font-weight="bold" fill="#b8860b">$32.000</text>
+    <text x="28" y="200" font-family="Segoe UI, sans-serif" font-size="10" font-weight="bold" fill="#1f2430">Movimientos recientes</text>
+    <rect x="24" y="210" width="192" height="42" rx="12" fill="#f8fafc"/>
+    <circle cx="44" cy="231" r="14" fill="#f0fdf4" stroke="#1b8a5a"/>
+    <text x="32" y="228" font-family="Segoe UI, sans-serif" font-size="12" fill="#1f2430">Supermercado</text>
+    <text x="32" y="240" font-family="Segoe UI, sans-serif" font-size="8" fill="#94a3b8">Hoy, 10:20 am</text>
+    <text x="204" y="234" font-family="Segoe UI, sans-serif" font-size="10" font-weight="bold" fill="#1f2430" text-anchor="end">-$85.000</text>
+    <rect x="24" y="258" width="192" height="42" rx="12" fill="#f8fafc"/>
+    <circle cx="44" cy="279" r="14" fill="#fff7e6" stroke="#ffb703"/>
+    <text x="32" y="276" font-family="Segoe UI, sans-serif" font-size="12" fill="#1f2430">Transporte</text>
+    <text x="32" y="288" font-family="Segoe UI, sans-serif" font-size="8" fill="#94a3b8">Ayer, 6:45 pm</text>
+    <text x="204" y="282" font-family="Segoe UI, sans-serif" font-size="10" font-weight="bold" fill="#1f2430" text-anchor="end">-$12.000</text>
+    <rect x="24" y="306" width="192" height="42" rx="12" fill="#f8fafc"/>
+    <circle cx="44" cy="327" r="14" fill="#f0fdf4" stroke="#1b8a5a"/>
+    <text x="32" y="324" font-family="Segoe UI, sans-serif" font-size="12" fill="#1f2430">Salario</text>
+    <text x="32" y="336" font-family="Segoe UI, sans-serif" font-size="8" fill="#94a3b8">Hace 2 dias</text>
+    <text x="204" y="330" font-family="Segoe UI, sans-serif" font-size="10" font-weight="bold" fill="#1b8a5a" text-anchor="end">+$1.200.000</text>
+    <rect x="16" y="376" width="208" height="64" fill="#ffffff"/>
+    <line x1="16" y1="376" x2="224" y2="376" stroke="#e2e8f0"/>
+    <rect x="20" y="396" width="44" height="28" rx="14" fill="#f0fdf4"/>
+    <path d="M34 402 L42 396 L50 402 L50 408 L34 408 Z" fill="#1b8a5a"/>
+    <rect x="88" y="401" width="14" height="14" rx="3" fill="none" stroke="#94a3b8" stroke-width="1.8"/>
+    <circle cx="95" cy="408" r="3" fill="#94a3b8"/>
+    <rect x="139" y="410" width="3" height="6" fill="#94a3b8"/>
+    <rect x="144.5" y="405" width="3" height="11" fill="#94a3b8"/>
+    <rect x="150" y="402" width="3" height="14" fill="#94a3b8"/>
+    <rect x="188" y="402" width="16" height="11" rx="5" fill="#94a3b8"/>
+    <path d="M193 413 L195 417 L198 413 Z" fill="#94a3b8"/>
+  </g>
 </svg>
