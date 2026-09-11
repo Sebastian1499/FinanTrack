@@ -37,18 +37,18 @@
     <text x="28" y="200" font-family="Segoe UI, sans-serif" font-size="10" font-weight="bold" fill="#1f2430">Movimientos recientes</text>
     <rect x="24" y="210" width="192" height="42" rx="12" fill="#f8fafc"/>
     <circle cx="44" cy="231" r="14" fill="#f0fdf4" stroke="#1b8a5a"/>
-    <text x="32" y="228" font-family="Segoe UI, sans-serif" font-size="12" fill="#1f2430">Supermercado</text>
-    <text x="32" y="240" font-family="Segoe UI, sans-serif" font-size="8" fill="#94a3b8">Hoy, 10:20 am</text>
+    <text x="68" y="228" font-family="Segoe UI, sans-serif" font-size="12" fill="#1f2430">Supermercado</text>
+    <text x="68" y="240" font-family="Segoe UI, sans-serif" font-size="8" fill="#94a3b8">Hoy, 10:20 am</text>
     <text x="204" y="234" font-family="Segoe UI, sans-serif" font-size="10" font-weight="bold" fill="#1f2430" text-anchor="end">-$85.000</text>
     <rect x="24" y="258" width="192" height="42" rx="12" fill="#f8fafc"/>
     <circle cx="44" cy="279" r="14" fill="#fff7e6" stroke="#ffb703"/>
-    <text x="32" y="276" font-family="Segoe UI, sans-serif" font-size="12" fill="#1f2430">Transporte</text>
-    <text x="32" y="288" font-family="Segoe UI, sans-serif" font-size="8" fill="#94a3b8">Ayer, 6:45 pm</text>
+    <text x="68" y="276" font-family="Segoe UI, sans-serif" font-size="12" fill="#1f2430">Transporte</text>
+    <text x="68" y="288" font-family="Segoe UI, sans-serif" font-size="8" fill="#94a3b8">Ayer, 6:45 pm</text>
     <text x="204" y="282" font-family="Segoe UI, sans-serif" font-size="10" font-weight="bold" fill="#1f2430" text-anchor="end">-$12.000</text>
     <rect x="24" y="306" width="192" height="42" rx="12" fill="#f8fafc"/>
     <circle cx="44" cy="327" r="14" fill="#f0fdf4" stroke="#1b8a5a"/>
-    <text x="32" y="324" font-family="Segoe UI, sans-serif" font-size="12" fill="#1f2430">Salario</text>
-    <text x="32" y="336" font-family="Segoe UI, sans-serif" font-size="8" fill="#94a3b8">Hace 2 dias</text>
+    <text x="68" y="324" font-family="Segoe UI, sans-serif" font-size="12" fill="#1f2430">Salario</text>
+    <text x="68" y="336" font-family="Segoe UI, sans-serif" font-size="8" fill="#94a3b8">Hace 2 dias</text>
     <text x="204" y="330" font-family="Segoe UI, sans-serif" font-size="10" font-weight="bold" fill="#1b8a5a" text-anchor="end">+$1.200.000</text>
     <rect x="16" y="376" width="208" height="64" fill="#ffffff"/>
     <line x1="16" y1="376" x2="224" y2="376" stroke="#e2e8f0"/>
