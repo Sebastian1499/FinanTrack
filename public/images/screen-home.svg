@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="#f4f8f6" />
+  <rect x="24" y="24" width="352" height="252" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
+  <text x="200" y="60" font-family="Segoe UI, sans-serif" font-size="18" fill="#0b1f3a" text-anchor="middle" font-weight="bold">Pantalla de inicio</text>
+  <rect x="48" y="84" width="304" height="60" rx="10" fill="#1b8a5a" />
+  <text x="200" y="120" font-family="Segoe UI, sans-serif" font-size="16" fill="#fff" text-anchor="middle">Saldo disponible: $850.000</text>
+  <rect x="48" y="160" width="144" height="90" rx="10" fill="#f0fdf4" stroke="#27c281" />
+  <rect x="208" y="160" width="144" height="90" rx="10" fill="#fff7e6" stroke="#ffb703" />
+  <text x="120" y="210" font-family="Segoe UI, sans-serif" font-size="13" fill="#1b8a5a" text-anchor="middle">Ahorro meta: 40%</text>
+  <text x="280" y="210" font-family="Segoe UI, sans-serif" font-size="13" fill="#b8860b" text-anchor="middle">Gastos hoy: $32.000</text>
+</svg>
