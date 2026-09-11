@@ -1,12 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
-  <rect width="400" height="300" fill="#f4f8f6" />
-  <rect x="24" y="24" width="352" height="252" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
-  <text x="200" y="52" font-family="Segoe UI, sans-serif" font-size="18" fill="#0b1f3a" text-anchor="middle" font-weight="bold">ChatBot de ahorro</text>
-  <rect x="48" y="70" width="220" height="40" rx="16" fill="#e2e8f0" />
-  <text x="60" y="95" font-family="Segoe UI, sans-serif" font-size="12" fill="#1f2430">¿Cuánto ahorrar para un viaje?</text>
-  <rect x="132" y="120" width="220" height="56" rx="16" fill="#1b8a5a" />
-  <text x="144" y="140" font-family="Segoe UI, sans-serif" font-size="11" fill="#fff">Ahorra $180.000 al mes durante</text>
-  <text x="144" y="156" font-family="Segoe UI, sans-serif" font-size="11" fill="#fff">6 meses para tu viaje soñado ✈️</text>
-  <rect x="48" y="188" width="220" height="40" rx="16" fill="#e2e8f0" />
-  <text x="60" y="213" font-family="Segoe UI, sans-serif" font-size="12" fill="#1f2430">Recomiéndame planes de viaje</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <rect width="400" height="400" fill="#f4f8f6" />
+  <ellipse cx="200" cy="368" rx="110" ry="14" fill="#0b1f3a" opacity="0.12" />
+  <rect x="120" y="24" width="160" height="336" rx="28" fill="#0b1f3a" />
+  <rect x="130" y="40" width="140" height="304" rx="18" fill="#ffffff" />
+  <text x="200" y="64" font-family="Segoe UI, sans-serif" font-size="11" fill="#0b1f3a" text-anchor="middle" font-weight="bold">ChatBot de ahorro</text>
+  <rect x="142" y="78" width="112" height="36" rx="14" fill="#e2e8f0" />
+  <text x="152" y="100" font-family="Segoe UI, sans-serif" font-size="9" fill="#1f2430">¿Cuánto ahorrar</text>
+  <text x="152" y="110" font-family="Segoe UI, sans-serif" font-size="9" fill="#1f2430">para un viaje?</text>
+  <rect x="146" y="124" width="112" height="52" rx="14" fill="#1b8a5a" />
+  <text x="158" y="144" font-family="Segoe UI, sans-serif" font-size="9" fill="#fff">Ahorra $180.000 al</text>
+  <text x="158" y="156" font-family="Segoe UI, sans-serif" font-size="9" fill="#fff">mes durante 6 meses</text>
+  <text x="158" y="168" font-family="Segoe UI, sans-serif" font-size="9" fill="#fff">para tu viaje</text>
+  <rect x="142" y="188" width="112" height="36" rx="14" fill="#e2e8f0" />
+  <text x="152" y="210" font-family="Segoe UI, sans-serif" font-size="9" fill="#1f2430">Recomiéndame planes</text>
+  <rect x="146" y="232" width="112" height="44" rx="14" fill="#1b8a5a" />
+  <text x="158" y="250" font-family="Segoe UI, sans-serif" font-size="9" fill="#fff">✈️ Plan Cartagena</text>
+  <text x="158" y="262" font-family="Segoe UI, sans-serif" font-size="9" fill="#fff">desde $450.000</text>
+  <rect x="142" y="292" width="112" height="26" rx="13" fill="#f4f8f6" stroke="#cbd5e1" />
+  <text x="198" y="309" font-family="Segoe UI, sans-serif" font-size="9" fill="#5b6472" text-anchor="middle">Escribe tu pregunta...</text>
 </svg>
