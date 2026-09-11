@@ -15,7 +15,17 @@ export default function Footer() {
         </div>
         <SocialLinks />
       </div>
-      <VisitorCounter />
+      <div className="stats-row">
+        <VisitorCounter />
+        <a
+          className="stats-link"
+          href="https://finantrack.goatcounter.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          📊 Ver estadísticas en vivo
+        </a>
+      </div>
       <p className="footer__copy">
         © {new Date().getFullYear()} FinanTrack. Proyecto de práctica académica.
       </p>
