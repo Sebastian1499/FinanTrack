@@ -12,9 +12,8 @@ export default function Gallery() {
     <section id="galeria" className="section section--alt">
       <h2>Imágenes del prototipo</h2>
       <p className="section__intro">
-        Vista previa del prototipo de FinanTrack. (Reemplaza estas imágenes de
-        ejemplo por capturas reales del prototipo en{' '}
-        <code>public/images</code>).
+        Así se ve FinanTrack: control de gastos, escaneo de recibos, reportes
+        y un asistente con IA, todo en un mismo lugar.
       </p>
       <div className="gallery-grid">
         {images.map((image) => (
