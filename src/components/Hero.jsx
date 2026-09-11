@@ -20,7 +20,7 @@ export default function Hero() {
         </div>
       </div>
       <div className="hero__image" aria-hidden="true">
-        <img src="/images/hero-mockup.svg" alt="Mockup de la app FinanTrack" />
+        <img src={`${import.meta.env.BASE_URL}images/hero-mockup.svg`} alt="Mockup de la app FinanTrack" />
       </div>
     </section>
   );

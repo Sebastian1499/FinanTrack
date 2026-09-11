@@ -1,17 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" width="480" height="480">
-  <rect width="480" height="480" rx="32" fill="#0b1f3a" />
-  <rect x="80" y="60" width="320" height="360" rx="28" fill="#12294d" stroke="#27c281" stroke-width="3" />
-  <rect x="104" y="96" width="272" height="48" rx="10" fill="#1b8a5a" />
-  <text x="240" y="126" font-family="Segoe UI, sans-serif" font-size="20" fill="#ffffff" text-anchor="middle">FinanTrack</text>
-  <rect x="104" y="164" width="272" height="70" rx="12" fill="#1c3a63" />
-  <text x="120" y="192" font-family="Segoe UI, sans-serif" font-size="14" fill="#9fb4d1">Gasto total del mes</text>
-  <text x="120" y="220" font-family="Segoe UI, sans-serif" font-size="26" font-weight="bold" fill="#ffffff">$1.245.000</text>
-  <rect x="104" y="250" width="130" height="90" rx="12" fill="#1c3a63" />
-  <rect x="246" y="250" width="130" height="90" rx="12" fill="#1c3a63" />
-  <circle cx="169" cy="285" r="20" fill="#ffb703" />
-  <circle cx="311" cy="285" r="20" fill="#27c281" />
-  <text x="169" y="325" font-family="Segoe UI, sans-serif" font-size="12" fill="#cbd5e1" text-anchor="middle">Comida</text>
-  <text x="311" y="325" font-family="Segoe UI, sans-serif" font-size="12" fill="#cbd5e1" text-anchor="middle">Transporte</text>
-  <rect x="104" y="356" width="272" height="40" rx="20" fill="#27c281" />
-  <text x="240" y="381" font-family="Segoe UI, sans-serif" font-size="14" fill="#0b1f3a" text-anchor="middle" font-weight="bold">Escanear recibo</text>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1f3a" />
+      <stop offset="1" stop-color="#123057" />
+    </linearGradient>
+  </defs>
+  <rect width="480" height="480" rx="32" fill="url(#bg)" />
+  <ellipse cx="240" cy="420" rx="140" ry="18" fill="#000000" opacity="0.25" />
+  <rect x="150" y="40" width="180" height="380" rx="32" fill="#0e1626" />
+  <rect x="160" y="58" width="160" height="344" rx="22" fill="#ffffff" />
+  <rect x="210" y="66" width="60" height="10" rx="5" fill="#0e1626" />
+  <rect x="176" y="92" width="128" height="46" rx="12" fill="#1b8a5a" />
+  <text x="240" y="111" font-family="Segoe UI, sans-serif" font-size="12" fill="#d1fadf" text-anchor="middle">Saldo disponible</text>
+  <text x="240" y="128" font-family="Segoe UI, sans-serif" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle">$1.245.000</text>
+  <rect x="176" y="150" width="60" height="64" rx="10" fill="#f0fdf4" stroke="#27c281" stroke-width="1.5" />
+  <rect x="244" y="150" width="60" height="64" rx="10" fill="#fff7e6" stroke="#ffb703" stroke-width="1.5" />
+  <circle cx="206" cy="174" r="14" fill="#27c281" />
+  <circle cx="274" cy="174" r="14" fill="#ffb703" />
+  <text x="206" y="203" font-family="Segoe UI, sans-serif" font-size="9" fill="#1b8a5a" text-anchor="middle">Comida</text>
+  <text x="274" y="203" font-family="Segoe UI, sans-serif" font-size="9" fill="#b8860b" text-anchor="middle">Transporte</text>
+  <path d="M176 250 L200 226 L220 244 L304 210" stroke="#1b8a5a" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  <rect x="176" y="268" width="128" height="38" rx="19" fill="#27c281" />
+  <text x="240" y="292" font-family="Segoe UI, sans-serif" font-size="13" fill="#0b1f3a" text-anchor="middle" font-weight="bold">Escanear recibo</text>
+  <rect x="176" y="318" width="128" height="64" rx="12" fill="#f4f8f6" stroke="#e2e8f0" />
+  <circle cx="196" cy="350" r="12" fill="#0b1f3a" />
+  <text x="216" y="345" font-family="Segoe UI, sans-serif" font-size="9" fill="#1f2430">ChatBot: ahorra</text>
+  <text x="216" y="358" font-family="Segoe UI, sans-serif" font-size="9" fill="#1f2430">$180.000/mes</text>
 </svg>

@@ -1,21 +1,23 @@
+import { ScanIcon, MLIcon, ChatIcon, SearchIcon } from './icons';
+
 const features = [
   {
-    icon: '📸',
+    Icon: ScanIcon,
     title: 'Escaneo automático (OCR)',
     text: 'Toma una foto de tus recibos y facturas: la IA extrae los datos sin que tengas que digitar nada.',
   },
   {
-    icon: '🤖',
+    Icon: MLIcon,
     title: 'Clasificación con Machine Learning',
     text: 'Un modelo de ML categoriza automáticamente cada gasto y genera reportes simples de en qué se va tu dinero.',
   },
   {
-    icon: '💬',
+    Icon: ChatIcon,
     title: 'ChatBot financiero con IA',
     text: 'Pregúntale cuánto deberías ahorrar para una meta (un carro, un viaje) y te dirá cuánto gastar o guardar cada mes.',
   },
   {
-    icon: '🔎',
+    Icon: SearchIcon,
     title: 'Recomendaciones inteligentes',
     text: 'El ChatBot navega por internet y te recomienda planes o artículos relacionados con lo que buscas.',
   },
@@ -33,9 +35,7 @@ export default function Proposal() {
       <div className="cards-grid">
         {features.map((feature) => (
           <div className="card" key={feature.title}>
-            <span className="card__icon" aria-hidden="true">
-              {feature.icon}
-            </span>
+            <feature.Icon />
             <h3>{feature.title}</h3>
             <p>{feature.text}</p>
           </div>

@@ -1,3 +1,5 @@
+import { LogoIcon } from './icons';
+
 export default function Navbar() {
   const links = [
     { href: '#problema', label: 'Problemática' },
@@ -10,7 +12,7 @@ export default function Navbar() {
   return (
     <header className="navbar">
       <div className="navbar__brand">
-        <span className="navbar__logo">💸</span>
+        <LogoIcon />
         <span>FinanTrack</span>
       </div>
       <nav className="navbar__links">

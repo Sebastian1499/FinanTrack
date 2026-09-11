@@ -1,11 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
-  <rect width="400" height="300" fill="#f4f8f6" />
-  <rect x="24" y="24" width="352" height="252" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
-  <text x="200" y="56" font-family="Segoe UI, sans-serif" font-size="18" fill="#0b1f3a" text-anchor="middle" font-weight="bold">Reporte por categoría</text>
-  <circle cx="130" cy="170" r="70" fill="none" stroke="#27c281" stroke-width="26" stroke-dasharray="150 300" transform="rotate(-90 130 170)" />
-  <circle cx="130" cy="170" r="70" fill="none" stroke="#ffb703" stroke-width="26" stroke-dasharray="90 300" stroke-dashoffset="-150" transform="rotate(-90 130 170)" />
-  <circle cx="130" cy="170" r="70" fill="none" stroke="#1b8a5a" stroke-width="26" stroke-dasharray="60 300" stroke-dashoffset="-240" transform="rotate(-90 130 170)" />
-  <rect x="240" y="120" width="14" height="14" fill="#27c281" /><text x="262" y="132" font-family="Segoe UI, sans-serif" font-size="12" fill="#1f2430">Comida 40%</text>
-  <rect x="240" y="150" width="14" height="14" fill="#ffb703" /><text x="262" y="162" font-family="Segoe UI, sans-serif" font-size="12" fill="#1f2430">Transporte 25%</text>
-  <rect x="240" y="180" width="14" height="14" fill="#1b8a5a" /><text x="262" y="192" font-family="Segoe UI, sans-serif" font-size="12" fill="#1f2430">Ocio 15%</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <rect width="400" height="400" fill="#f4f8f6" />
+  <ellipse cx="200" cy="368" rx="110" ry="14" fill="#0b1f3a" opacity="0.12" />
+  <rect x="120" y="24" width="160" height="336" rx="28" fill="#0b1f3a" />
+  <rect x="130" y="40" width="140" height="304" rx="18" fill="#ffffff" />
+  <text x="200" y="64" font-family="Segoe UI, sans-serif" font-size="11" fill="#0b1f3a" text-anchor="middle" font-weight="bold">Reporte del mes</text>
+  <circle cx="200" cy="128" r="46" fill="none" stroke="#27c281" stroke-width="16" stroke-dasharray="96 289" transform="rotate(-90 200 128)" />
+  <circle cx="200" cy="128" r="46" fill="none" stroke="#ffb703" stroke-width="16" stroke-dasharray="58 289" stroke-dashoffset="-96" transform="rotate(-90 200 128)" />
+  <circle cx="200" cy="128" r="46" fill="none" stroke="#0b1f3a" stroke-width="16" stroke-dasharray="40 289" stroke-dashoffset="-154" transform="rotate(-90 200 128)" />
+  <text x="200" y="133" font-family="Segoe UI, sans-serif" font-size="13" fill="#1f2430" text-anchor="middle" font-weight="bold">$620k</text>
+  <rect x="148" y="190" width="12" height="12" fill="#27c281" /><text x="166" y="200" font-family="Segoe UI, sans-serif" font-size="10" fill="#1f2430">Comida 40%</text>
+  <rect x="148" y="212" width="12" height="12" fill="#ffb703" /><text x="166" y="222" font-family="Segoe UI, sans-serif" font-size="10" fill="#1f2430">Transporte 25%</text>
+  <rect x="148" y="234" width="12" height="12" fill="#0b1f3a" /><text x="166" y="244" font-family="Segoe UI, sans-serif" font-size="10" fill="#1f2430">Ocio 15%</text>
+  <rect x="148" y="264" width="104" height="52" rx="10" fill="#f0fdf4" stroke="#27c281" />
+  <text x="200" y="286" font-family="Segoe UI, sans-serif" font-size="9" fill="#1b8a5a" text-anchor="middle">Recomendación IA</text>
+  <text x="200" y="300" font-family="Segoe UI, sans-serif" font-size="9" fill="#1b8a5a" text-anchor="middle">Reduce 10% en Ocio</text>
 </svg>
