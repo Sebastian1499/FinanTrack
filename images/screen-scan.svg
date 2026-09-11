@@ -1,41 +1,41 @@
 ﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 480" width="240" height="480">
   <defs>
     <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
-      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0b1f3a" flood-opacity="0.18"/>
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0b1120" flood-opacity="0.18"/>
     </filter>
     <clipPath id="clip"><rect x="16" y="24" width="208" height="416" rx="28"/></clipPath>
   </defs>
   <rect width="240" height="480" fill="#ffffff"/>
-  <ellipse cx="120" cy="468" rx="86" ry="10" fill="#0b1f3a" opacity="0.12"/>
-  <rect x="8" y="8" width="224" height="464" rx="36" fill="#0b1f3a"/>
-  <rect x="98" y="13" width="44" height="6" rx="3" fill="#12294d"/>
-  <rect x="95" y="453" width="50" height="5" rx="2.5" fill="#12294d"/>
+  <ellipse cx="120" cy="468" rx="86" ry="10" fill="#0b1120" opacity="0.12"/>
+  <rect x="8" y="8" width="224" height="464" rx="36" fill="#0b1120"/>
+  <rect x="98" y="13" width="44" height="6" rx="3" fill="#17223b"/>
+  <rect x="95" y="453" width="50" height="5" rx="2.5" fill="#17223b"/>
   <g clip-path="url(#clip)">
-    <rect x="16" y="24" width="208" height="416" fill="#0f1b2e"/>
+    <rect x="16" y="24" width="208" height="416" fill="#0b1120"/>
     <text x="32" y="46" font-family="Segoe UI, sans-serif" font-size="9" font-weight="bold" fill="#ffffff">9:41</text>
     <path d="M32 66 L24 74 L32 82" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
     <text x="120" y="80" font-family="Segoe UI, sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">Escanear recibo</text>
-    <rect x="32" y="100" width="176" height="210" rx="16" fill="#182a45"/>
-    <path d="M44 116 h-4 a8 8 0 0 0 -8 8 v4" stroke="#27c281" stroke-width="3" fill="none"/>
-    <path d="M196 116 h4 a8 8 0 0 1 8 8 v4" stroke="#27c281" stroke-width="3" fill="none"/>
-    <path d="M44 294 h-4 a8 8 0 0 1 -8 -8 v-4" stroke="#27c281" stroke-width="3" fill="none"/>
-    <path d="M196 294 h4 a8 8 0 0 0 8 -8 v-4" stroke="#27c281" stroke-width="3" fill="none"/>
+    <rect x="32" y="100" width="176" height="210" rx="16" fill="#17223b"/>
+    <path d="M44 116 h-4 a8 8 0 0 0 -8 8 v4" stroke="#2dd9b9" stroke-width="3" fill="none"/>
+    <path d="M196 116 h4 a8 8 0 0 1 8 8 v4" stroke="#2dd9b9" stroke-width="3" fill="none"/>
+    <path d="M44 294 h-4 a8 8 0 0 1 -8 -8 v-4" stroke="#2dd9b9" stroke-width="3" fill="none"/>
+    <path d="M196 294 h4 a8 8 0 0 0 8 -8 v-4" stroke="#2dd9b9" stroke-width="3" fill="none"/>
     <rect x="72" y="132" width="96" height="130" rx="4" fill="#ffffff"/>
     <line x1="84" y1="152" x2="156" y2="152" stroke="#cbd5e1" stroke-width="3"/>
     <line x1="84" y1="164" x2="156" y2="164" stroke="#cbd5e1" stroke-width="3"/>
     <line x1="84" y1="176" x2="132" y2="176" stroke="#cbd5e1" stroke-width="3"/>
-    <rect x="84" y="192" width="72" height="16" rx="4" fill="#27c281"/>
+    <rect x="84" y="192" width="72" height="16" rx="4" fill="#2dd9b9"/>
     <text x="120" y="204" font-family="Segoe UI, sans-serif" font-size="8" fill="#ffffff" text-anchor="middle">$45.900</text>
     <line x1="84" y1="220" x2="140" y2="220" stroke="#cbd5e1" stroke-width="3"/>
     <line x1="84" y1="232" x2="156" y2="232" stroke="#cbd5e1" stroke-width="3"/>
-    <rect x="46" y="112" width="50" height="18" rx="9" fill="#1b8a5a"/>
+    <rect x="46" y="112" width="50" height="18" rx="9" fill="#14b8a6"/>
     <text x="71" y="124" font-family="Segoe UI, sans-serif" font-size="7" fill="#ffffff" text-anchor="middle">IA analizando</text>
     <rect x="32" y="322" width="176" height="52" rx="14" fill="#ffffff" filter="url(#shadow)"/>
-    <circle cx="52" cy="348" r="12" fill="#f0fdf4" stroke="#1b8a5a"/>
-    <path d="M47 348 L51 352 L58 343" stroke="#1b8a5a" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="52" cy="348" r="12" fill="#e6fbf7" stroke="#14b8a6"/>
+    <path d="M47 348 L51 352 L58 343" stroke="#14b8a6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
     <text x="70" y="344" font-family="Segoe UI, sans-serif" font-size="10" font-weight="bold" fill="#1f2430">Total detectado</text>
-    <text x="70" y="358" font-family="Segoe UI, sans-serif" font-size="12" font-weight="bold" fill="#1b8a5a">$45.900 - Comida</text>
-    <circle cx="120" cy="412" r="22" fill="#ffffff" stroke="#1b8a5a" stroke-width="3"/>
-    <circle cx="120" cy="412" r="10" fill="#1b8a5a"/>
+    <text x="70" y="358" font-family="Segoe UI, sans-serif" font-size="12" font-weight="bold" fill="#14b8a6">$45.900 - Comida</text>
+    <circle cx="120" cy="412" r="22" fill="#ffffff" stroke="#14b8a6" stroke-width="3"/>
+    <circle cx="120" cy="412" r="10" fill="#14b8a6"/>
   </g>
 </svg>
