@@ -1,5 +1,4 @@
 import SocialLinks from './SocialLinks';
-import VisitorCounter from './VisitorCounter';
 import { LogoIcon } from './icons';
 
 export default function Footer() {
@@ -14,17 +13,6 @@ export default function Footer() {
           </div>
         </div>
         <SocialLinks />
-      </div>
-      <div className="stats-row">
-        <VisitorCounter />
-        <a
-          className="stats-link"
-          href="https://finantrack.goatcounter.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          📊 Ver estadísticas en vivo
-        </a>
       </div>
       <p className="footer__copy">
         © {new Date().getFullYear()} FinanTrack. Proyecto de práctica académica.

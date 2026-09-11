@@ -2,6 +2,7 @@
 import Hero from './components/Hero';
 import Problem from './components/Problem';
 import Proposal from './components/Proposal';
+import ImpactStats from './components/ImpactStats';
 import Gallery from './components/Gallery';
 import AboutUs from './components/AboutUs';
 import ContactForm from './components/ContactForm';
@@ -16,6 +17,7 @@ function App() {
         <Hero />
         <Problem />
         <Proposal />
+        <ImpactStats />
         <Gallery />
         <AboutUs />
         <ContactForm />

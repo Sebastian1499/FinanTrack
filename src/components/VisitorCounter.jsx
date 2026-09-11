@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 
 // Contador simple basado en localStorage (solo cuenta visitas de este navegador).
-// Para estadísticas reales de todos los visitantes, integra Google Analytics o Plausible.
+// Para estadísticas agregadas de todos los visitantes, esta landing tambien envia
+// datos a GoatCounter (ver index.html) que puedes revisar aparte al presentar el proyecto.
 export default function VisitorCounter() {
   const [visits, setVisits] = useState(0);
 
@@ -13,11 +14,9 @@ export default function VisitorCounter() {
   }, []);
 
   return (
-    <div className="visitor-counter">
-      <span className="visitor-counter__number">{visits}</span>
-      <span className="visitor-counter__label">
-        visitas registradas en este navegador
-      </span>
+    <div className="stat-card">
+      <span className="stat-card__number">{visits}</span>
+      <span className="stat-card__label">Visitas en este navegador</span>
     </div>
   );
 }

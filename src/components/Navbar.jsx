@@ -4,6 +4,7 @@ export default function Navbar() {
   const links = [
     { href: '#problema', label: 'Problemática' },
     { href: '#propuesta', label: 'Propuesta' },
+    { href: '#impacto', label: 'Impacto' },
     { href: '#galeria', label: 'Galería' },
     { href: '#nosotros', label: 'Quiénes somos' },
     { href: '#contacto', label: 'Contacto' },
