@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { LogoIcon } from './icons';
 
 export default function Navbar() {
@@ -22,6 +23,9 @@ export default function Navbar() {
             {link.label}
           </a>
         ))}
+        <Link to="/login" className="btn btn--ghost navbar__cta">
+          Iniciar sesión
+        </Link>
       </nav>
     </header>
   );

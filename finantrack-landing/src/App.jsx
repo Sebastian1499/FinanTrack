@@ -1,29 +1,37 @@
-﻿import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Problem from './components/Problem';
-import Proposal from './components/Proposal';
-import ImpactStats from './components/ImpactStats';
-import Gallery from './components/Gallery';
-import AboutUs from './components/AboutUs';
-import ContactForm from './components/ContactForm';
-import Footer from './components/Footer';
+﻿import { Routes, Route } from 'react-router-dom';
+import Landing from './pages/Landing';
+import Login from './app/pages/Login';
+import Register from './app/pages/Register';
+import AppLayout from './app/AppLayout';
+import ProtectedRoute from './app/ProtectedRoute';
+import Dashboard from './app/pages/Dashboard';
+import Transactions from './app/pages/Transactions';
+import ScanReceipt from './app/pages/ScanReceipt';
+import Goals from './app/pages/Goals';
+import Chatbot from './app/pages/Chatbot';
 import './App.css';
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <main>
-        <Hero />
-        <Problem />
-        <Proposal />
-        <ImpactStats />
-        <Gallery />
-        <AboutUs />
-        <ContactForm />
-      </main>
-      <Footer />
-    </>
+    <Routes>
+      <Route path="/" element={<Landing />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route
+        path="/app"
+        element={
+          <ProtectedRoute>
+            <AppLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<Dashboard />} />
+        <Route path="transacciones" element={<Transactions />} />
+        <Route path="escanear" element={<ScanReceipt />} />
+        <Route path="metas" element={<Goals />} />
+        <Route path="chat" element={<Chatbot />} />
+      </Route>
+    </Routes>
   );
 }
 

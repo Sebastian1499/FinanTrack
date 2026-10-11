@@ -1,6 +1,6 @@
-# FinanTrack — Landing Page
+# FinanTrack — Landing Page + App
 
-Landing page de lanzamiento del prototipo **FinanTrack**, una app que usa IA (OCR + Machine Learning + ChatBot) para automatizar el control de gastos personales.
+Landing page y aplicación funcional del prototipo **FinanTrack**, una app que usa IA (OCR + Machine Learning + ChatBot) para automatizar el control de gastos personales.
 
 ## Contenido incluido
 
@@ -13,6 +13,7 @@ Landing page de lanzamiento del prototipo **FinanTrack**, una app que usa IA (OC
 - Enlaces a redes sociales / noticias (placeholders)
 - Contador de visitas en pantalla (demo, basado en `localStorage`)
 - Analítica real de visitantes con [GoatCounter](https://www.goatcounter.com/) (gratis, sin cookies de rastreo)
+- **App funcional** en `/#/app` (login/registro, transacciones, escaneo de recibos con OCR, metas de ahorro y chatbot financiero), conectada a la API en `../server`
 
 ## Antes de publicar: pendientes por configurar
 
@@ -25,13 +26,25 @@ Landing page de lanzamiento del prototipo **FinanTrack**, una app que usa IA (OC
    3. En `index.html`, reemplaza `TU-CODIGO` por ese código en la línea `data-goatcounter="https://TU-CODIGO.goatcounter.com/count"`.
    4. Después de publicar, entra a `https://TU-CODIGO.goatcounter.com` para ver el dashboard con las estadísticas reales.
 5. **Nombre del repositorio**: la landing ya está configurada para `https://github.com/Sebastian1499/FinanTrack`. Si cambias de repositorio, actualiza el `base` en `vite.config.js` y el campo `homepage` en `package.json`.
+6. **API en producción**: la app (`/#/app`) necesita que el backend (`../server`) esté corriendo y accesible. Configura `VITE_API_URL` en `.env` apuntando a la URL pública de tu API antes de hacer `npm run build`.
 
 ## Desarrollo local
 
+Necesitas correr **dos servidores** en paralelo: la API (`server/`) y el frontend (`finantrack-landing/`).
+
 ```bash
+# Terminal 1 — API
+cd ../server
+npm run dev
+
+# Terminal 2 — Frontend
+cd finantrack-landing
 npm install
 npm run dev
 ```
+
+La app queda disponible en `http://localhost:5173/FinanTrack/#/app` (registro en `#/register`). Ver [server/README.md](../server/README.md) para detalles del backend.
+
 
 ## Publicar en GitHub Pages
 
