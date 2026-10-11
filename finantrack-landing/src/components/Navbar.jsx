@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { LogoIcon } from './icons';
+import Logo from './Logo';
 
 export default function Navbar() {
   const links = [
@@ -13,10 +13,9 @@ export default function Navbar() {
 
   return (
     <header className="navbar">
-      <div className="navbar__brand">
-        <LogoIcon />
-        <span>FinanTrack</span>
-      </div>
+      <Link to="/" className="navbar__brand">
+        <Logo height={48} />
+      </Link>
       <nav className="navbar__links">
         {links.map((link) => (
           <a key={link.href} href={link.href}>

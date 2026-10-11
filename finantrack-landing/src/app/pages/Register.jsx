@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/useAuth';
+import Logo from '../../components/Logo';
 
 export default function Register() {
   const { register } = useAuth();
@@ -30,6 +31,7 @@ export default function Register() {
   return (
     <div className="auth-screen">
       <form className="auth-card" onSubmit={handleSubmit}>
+        <Logo height={96} className="auth-card__logo" />
         <h1>Crear cuenta</h1>
         <p className="auth-card__subtitle">Empieza a controlar tus finanzas con FinanTrack</p>
 

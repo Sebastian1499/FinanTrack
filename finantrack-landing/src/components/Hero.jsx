@@ -1,11 +1,14 @@
 import { Link } from 'react-router-dom';
+import Logo from './Logo';
 
 export default function Hero() {
   return (
     <section className="hero">
       <div className="hero__text">
+        <h1 className="hero__logo">
+          <Logo height={200} />
+        </h1>
         <p className="hero__eyebrow">Prototipo de finanzas personales con IA</p>
-        <h1>FinanTrack</h1>
         <p className="hero__subtitle">
           Escanea tus recibos, olvídate de digitar tus gastos y descubre en
           qué se va tu dinero cada mes. FinanTrack usa visión por computador y

@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { LogoIcon } from '../components/icons';
+import Logo from '../components/Logo';
 import { useAuth } from '../context/useAuth';
 import './app.css';
 
@@ -24,8 +24,9 @@ export default function AppLayout() {
     <div className="app-shell">
       <aside className="app-sidebar">
         <div className="app-sidebar__brand">
-          <LogoIcon />
-          <span>FinanTrack</span>
+          <span className="logo-chip">
+            <Logo height={72} />
+          </span>
         </div>
         <nav className="app-sidebar__nav">
           {NAV_ITEMS.map((item) => (

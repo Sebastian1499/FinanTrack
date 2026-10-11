@@ -1,23 +1,5 @@
 ﻿// Iconos SVG originales (evitan depender de emoji genÃ©ricos).
 
-export function LogoIcon({ size = 28 }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 40 40" fill="none" aria-hidden="true">
-      <rect width="40" height="40" rx="10" fill="#0b1120" />
-      <path
-        d="M9 26 L16 18 L21 23 L31 11"
-        stroke="#2dd9b9"
-        strokeWidth="3"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      />
-      <path d="M25 11 H31 V17" stroke="#94a3b8" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-      <circle cx="9" cy="26" r="2.6" fill="#94a3b8" />
-    </svg>
-  );
-}
-
 export function ScanIcon() {
   return (
     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">

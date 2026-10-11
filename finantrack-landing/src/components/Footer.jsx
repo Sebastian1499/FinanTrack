@@ -1,14 +1,15 @@
 import SocialLinks from './SocialLinks';
-import { LogoIcon } from './icons';
+import Logo from './Logo';
 
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer__top">
         <div className="footer__brand">
-          <LogoIcon size={32} />
+          <span className="logo-chip">
+            <Logo height={72} />
+          </span>
           <div>
-            <h3>FinanTrack</h3>
             <p>Prototipo académico — Control financiero personal con IA.</p>
           </div>
         </div>
