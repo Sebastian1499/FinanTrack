@@ -1,0 +1,22 @@
+# Blueprint de Render para la API de FinanTrack.
+# Crear en Render: New > Blueprint > seleccionar este repositorio.
+services:
+  - type: web
+    name: finantrack-api
+    runtime: node
+    plan: free
+    rootDir: server
+    buildCommand: npm ci && npx prisma generate --schema prisma/schema.postgres.prisma
+    startCommand: npx prisma db push --schema prisma/schema.postgres.prisma --skip-generate && node src/index.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 22.14.0
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGIN
+        value: https://sebastian1499.github.io
+      - key: AI_API_KEY
+        sync: false
