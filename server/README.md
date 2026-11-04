@@ -30,7 +30,7 @@ Variables de entorno (`.env`, ver `.env.example`):
 | `PORT` | Puerto del servidor (por defecto 4000) |
 | `AI_API_KEY` | Opcional. Si se define, el chatbot usa un modelo de IA real en vez del motor de reglas local |
 | `AI_BASE_URL` | URL base compatible con OpenAI (por defecto la de Google Gemini) |
-| `AI_MODEL` | Nombre del modelo a usar (por defecto `gemini-3.8-flash`) |
+| `AI_MODEL` | Nombre del modelo a usar (por defecto `gemini-3-flash-preview`) |
 
 ### Activar el chatbot con IA real (Google Gemini, gratis)
 

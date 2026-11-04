@@ -57,7 +57,7 @@ function ruleBasedReply(message, context = {}) {
 
 async function aiReply(message, context) {
   const baseUrl = process.env.AI_BASE_URL || 'https://generativelanguage.googleapis.com/v1beta/openai';
-  const model = process.env.AI_MODEL || 'gemini-3.8-flash';
+  const model = process.env.AI_MODEL || 'gemini-3-flash-preview';
   const apiKey = process.env.AI_API_KEY;
 
   const systemPrompt = `Eres el asistente financiero de la app FinanTrack. Responde en español, de forma breve y práctica, ayudando al usuario a organizar sus gastos y metas de ahorro.${
