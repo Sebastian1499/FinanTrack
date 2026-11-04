@@ -1,6 +1,6 @@
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api';
 
-async function request(path, { method = 'GET', body, token, isFormData } = {}) {
+async function request(path, { method = 'GET', body, token, isFormData, timeout } = {}) {
   const headers = {};
   if (!isFormData) headers['Content-Type'] = 'application/json';
   if (token) headers.Authorization = `Bearer ${token}`;
@@ -9,6 +9,7 @@ async function request(path, { method = 'GET', body, token, isFormData } = {}) {
     method,
     headers,
     body: isFormData ? body : body ? JSON.stringify(body) : undefined,
+    signal: timeout ? AbortSignal.timeout(timeout) : undefined,
   });
 
   const data = response.status === 204 ? null : await response.json().catch(() => null);
@@ -34,5 +35,6 @@ export const api = {
   updateGoal: (token, id, payload) => request(`/goals/${id}`, { method: 'PATCH', body: payload, token }),
   deleteGoal: (token, id) => request(`/goals/${id}`, { method: 'DELETE', token }),
 
-  sendChatMessage: (token, message, history) => request('/chat', { method: 'POST', body: { message, history }, token }),
+  sendChatMessage: (token, message, history) =>
+    request('/chat', { method: 'POST', body: { message, history }, token, timeout: 25000 }),
 };

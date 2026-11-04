@@ -1,5 +1,8 @@
 const { extractAmounts } = require('./numbers');
 
+// Si la IA externa no responde a tiempo, se usan las reglas locales.
+const AI_TIMEOUT_MS = 15000;
+
 // Extrae "ahorrar X en N meses/años" del mensaje del usuario.
 function parseSavingsIntent(message) {
   const monthsMatch = message.match(/(\d+)\s*(meses|mes|años|año)/i);
@@ -77,6 +80,7 @@ async function aiReply(message, context) {
       messages: [{ role: 'system', content: systemPrompt }, ...history, { role: 'user', content: message }],
       temperature: 0.4,
     }),
+    signal: AbortSignal.timeout(AI_TIMEOUT_MS),
   });
 
   if (!response.ok) {
