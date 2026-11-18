@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../../context/useAuth';
 import { api } from '../../api/client';
+import { formatCOP } from '../utils/format';
 
 const CAMERA_ERRORS = {
   NotAllowedError: 'Permiso de cámara denegado. Actívalo en la configuración del navegador para tomar fotos.',
@@ -9,6 +10,14 @@ const CAMERA_ERRORS = {
 };
 
 const EMPTY_RESULT = { type: 'EXPENSE', amount: '', description: '', category: '' };
+
+// Traduce la confianza (0-1) del servidor a una etiqueta visible.
+function confidenceInfo(value) {
+  const score = Number(value) || 0;
+  if (score >= 0.8) return { key: 'alta', label: 'alta' };
+  if (score >= 0.7) return { key: 'media', label: 'media' };
+  return { key: 'baja', label: 'baja' };
+}
 
 export default function ScanReceipt() {
   const { token } = useAuth();
@@ -24,6 +33,7 @@ export default function ScanReceipt() {
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
   const [saved, setSaved] = useState(false);
+  const [confirmed, setConfirmed] = useState(false);
 
   const cameraSupported = typeof navigator !== 'undefined' && Boolean(navigator.mediaDevices?.getUserMedia);
 
@@ -53,7 +63,11 @@ export default function ScanReceipt() {
     setError('');
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: { ideal: 'environment' } },
+        video: {
+          facingMode: { ideal: 'environment' },
+          width: { ideal: 1920 },
+          height: { ideal: 1440 },
+        },
         audio: false,
       });
       streamRef.current = stream;
@@ -67,6 +81,7 @@ export default function ScanReceipt() {
     setFile(selected);
     setResult(null);
     setSaved(false);
+    setConfirmed(false);
     setError('');
     setPreview(selected ? URL.createObjectURL(selected) : null);
   }
@@ -76,6 +91,7 @@ export default function ScanReceipt() {
     setError('');
     setResult(null);
     setSaved(false);
+    setConfirmed(false);
     try {
       const formData = new FormData();
       formData.append('receipt', target);
@@ -85,6 +101,10 @@ export default function ScanReceipt() {
         amount: data.amount ?? '',
         description: data.description ?? '',
         category: data.category ?? '',
+        detected: data.detected || {},
+        confidence: data.confidence ?? 0,
+        needsReview: Boolean(data.needsReview),
+        warnings: Array.isArray(data.warnings) ? data.warnings : [],
       });
     } catch (err) {
       setError(err.message);
@@ -129,6 +149,14 @@ export default function ScanReceipt() {
   async function handleConfirm(e) {
     e.preventDefault();
     setError('');
+    if (result.needsReview && !confirmed) {
+      setError('Confirma que revisaste el comercio y el monto antes de guardar.');
+      return;
+    }
+    if (!(Number(result.amount) > 0)) {
+      setError('El monto debe ser mayor a cero.');
+      return;
+    }
     try {
       await api.createTransaction(token, {
         amount: Number(result.amount),
@@ -147,8 +175,11 @@ export default function ScanReceipt() {
     setPreview(null);
     setResult(null);
     setSaved(false);
+    setConfirmed(false);
     setError('');
   }
+
+  const confidence = confidenceInfo(result?.confidence);
 
   return (
     <div className="scan-page">
@@ -195,6 +226,11 @@ export default function ScanReceipt() {
             Este navegador no permite usar la cámara (requiere HTTPS). Puedes subir una imagen desde archivo.
           </p>
         )}
+        {!cameraOn && (
+          <p className="panel__empty">
+            Consejo: encuadra el recibo completo, con buena luz y sin sombras. Evita fotos borrosas o inclinadas.
+          </p>
+        )}
         {cameraError && <p className="auth-card__error">{cameraError}</p>}
 
         {cameraOn && (
@@ -229,6 +265,28 @@ export default function ScanReceipt() {
         {result && (
           <form className="scan-page__result" onSubmit={handleConfirm}>
             <h2>Revisa los datos detectados</h2>
+            <div className="scan-detected">
+              <div className="scan-detected__item scan-highlight">
+                <span className="scan-detected__label">Comercio</span>
+                <strong className="scan-detected__value">{result.detected?.merchant || 'No identificado'}</strong>
+              </div>
+              <div className="scan-detected__item scan-highlight">
+                <span className="scan-detected__label">Total</span>
+                <strong className="scan-detected__value scan-detected__value--amount">
+                  {result.detected?.total != null ? formatCOP(result.detected.total) : 'No identificado'}
+                </strong>
+              </div>
+              <span className={`scan-confidence scan-confidence--${confidence.key}`}>
+                Confianza {confidence.label}
+              </span>
+            </div>
+            {result.warnings.length > 0 && (
+              <ul className="scan-warnings" role="alert">
+                {result.warnings.map((warning) => (
+                  <li key={warning}>{warning}</li>
+                ))}
+              </ul>
+            )}
             <p className="panel__empty">La lectura automática puede tener errores. Confirma antes de guardar.</p>
             <label className="field">
               <span>Tipo de movimiento</span>
@@ -239,18 +297,43 @@ export default function ScanReceipt() {
             </label>
             <label className="field">
               <span>Monto</span>
-              <input type="number" name="amount" value={result.amount} onChange={handleResultChange} required />
+              <input
+                type="number"
+                name="amount"
+                value={result.amount}
+                onChange={handleResultChange}
+                min="0.01"
+                step="any"
+                required
+              />
             </label>
             <label className="field">
               <span>Descripción</span>
-              <input type="text" name="description" value={result.description} onChange={handleResultChange} required />
+              <input
+                type="text"
+                name="description"
+                value={result.description}
+                onChange={handleResultChange}
+                maxLength={80}
+                required
+              />
             </label>
             <label className="field">
               <span>Categoría</span>
               <input type="text" name="category" value={result.category} onChange={handleResultChange} />
             </label>
+            {result.needsReview && (
+              <label className="scan-confirm">
+                <input type="checkbox" checked={confirmed} onChange={(e) => setConfirmed(e.target.checked)} />
+                <span>Revisé el comercio y el monto, y confirmo que son correctos.</span>
+              </label>
+            )}
             <div className="scan-page__buttons">
-              <button type="submit" className="btn btn--primary" disabled={saved}>
+              <button
+                type="submit"
+                className="btn btn--primary"
+                disabled={saved || (result.needsReview && !confirmed)}
+              >
                 {saved ? 'Guardado' : 'Guardar transacción'}
               </button>
               {saved && (

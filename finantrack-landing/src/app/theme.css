@@ -662,6 +662,93 @@
   background: #fff;
 }
 
+.scan-detected {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+.scan-highlight {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+  padding: 0.75rem;
+  border-radius: var(--app-radius-sm);
+  background: #fff;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--app-income);
+}
+
+.scan-detected__label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.scan-detected__value {
+  color: var(--brand-dark);
+  font-size: 0.95rem;
+  overflow-wrap: anywhere;
+}
+
+.scan-detected__value--amount {
+  font-size: 1.2rem;
+  color: var(--app-income);
+}
+
+.scan-confidence {
+  grid-column: 1 / -1;
+  justify-self: start;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.scan-confidence--alta {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.scan-confidence--media {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.scan-confidence--baja {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.scan-warnings {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+  color: #854d0e;
+}
+
+.scan-confirm {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.scan-confirm input {
+  margin-top: 0.2rem;
+}
+
+@media (max-width: 400px) {
+  .scan-detected {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ---------- Chat (solo ajustes responsivos; estilos base en app.css) ---------- */
 
 .chat-bubble {

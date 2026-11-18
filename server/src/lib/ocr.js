@@ -1,48 +1,72 @@
 const { createWorker } = require('tesseract.js');
-const { NUMBER_REGEX, parseAmountToken, extractAmounts } = require('./numbers');
 
-// Busca el monto total del recibo: prioriza líneas con "total" y, si no hay,
-// toma el número más grande detectado en el texto.
-function extractAmount(text) {
-  const lines = text.split('\n');
-  const totalLine = lines.find((line) => /total/i.test(line) && !/sub ?total/i.test(line));
+// Modo de segmentación de Tesseract: '4' = una columna de texto de tamaño variable.
+const PSM_SINGLE_COLUMN = '4';
 
-  if (totalLine) {
-    const matches = totalLine.match(NUMBER_REGEX);
-    if (matches && matches.length) {
-      const value = parseAmountToken(matches[matches.length - 1]);
-      if (!Number.isNaN(value)) return value;
-    }
+// Un solo worker reutilizado: crear uno por petición es lento (carga el idioma en cada escaneo).
+let workerPromise = null;
+// Las peticiones se procesan en serie para no competir por el mismo worker.
+let queue = Promise.resolve();
+
+function getWorker() {
+  if (!workerPromise) {
+    workerPromise = createWorker('spa')
+      .then(async (worker) => {
+        await worker.setParameters({ tessedit_pageseg_mode: PSM_SINGLE_COLUMN });
+        return worker;
+      })
+      .catch((error) => {
+        workerPromise = null;
+        throw error;
+      });
   }
-
-  const values = extractAmounts(text);
-  return values.length ? Math.max(...values) : null;
+  return workerPromise;
 }
 
-function extractDescription(text) {
-  const firstLine = text
-    .split('\n')
-    .map((line) => line.trim())
-    .find((line) => line.length > 2);
-  return firstLine || 'Recibo escaneado';
-}
-
-async function recognizeReceipt(buffer) {
-  const worker = await createWorker('spa');
+async function resetWorker() {
+  const current = workerPromise;
+  workerPromise = null;
+  if (!current) return;
   try {
-    const { data } = await worker.recognize(buffer);
-    return data.text;
-  } finally {
+    const worker = await current;
     await worker.terminate();
+  } catch {
+    // El worker ya no estaba disponible; basta con descartarlo.
   }
 }
 
-function parseReceipt(text) {
-  return {
-    amount: extractAmount(text),
-    description: extractDescription(text),
-    rawText: text,
-  };
+function flattenLines(data) {
+  const blocks = data.blocks || [];
+  return blocks.flatMap((block) =>
+    (block.paragraphs || []).flatMap((paragraph) =>
+      (paragraph.lines || []).map((line) => ({
+        text: line.text,
+        confidence: line.confidence,
+        bbox: line.bbox,
+      }))
+    )
+  );
 }
 
-module.exports = { recognizeReceipt, parseReceipt };
+// Reconoce el texto de una imagen ya preprocesada.
+// Devuelve el texto completo, las líneas con su caja delimitadora y la confianza de la página (0-100).
+function recognizeReceipt(imageBuffer) {
+  const run = queue.then(async () => {
+    try {
+      const worker = await getWorker();
+      const { data } = await worker.recognize(imageBuffer, {}, { text: true, blocks: true });
+      return {
+        text: data.text || '',
+        confidence: Number(data.confidence) || 0,
+        lines: flattenLines(data),
+      };
+    } catch (error) {
+      await resetWorker();
+      throw error;
+    }
+  });
+  queue = run.catch(() => {});
+  return run;
+}
+
+module.exports = { recognizeReceipt };

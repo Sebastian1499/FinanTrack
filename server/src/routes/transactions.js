@@ -5,7 +5,9 @@ const auth = require('../middleware/auth');
 const { validateBody } = require('../middleware/validate');
 const { transactionSchema } = require('../lib/schemas');
 const { categorize } = require('../lib/categorize');
-const { recognizeReceipt, parseReceipt } = require('../lib/ocr');
+const { recognizeReceipt } = require('../lib/ocr');
+const { prepareReceiptImage } = require('../lib/receiptImage');
+const { parseReceipt } = require('../lib/receiptParser');
 
 const router = Router();
 const ALLOWED_IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif']);
@@ -68,22 +70,23 @@ router.delete('/:id', async (req, res) => {
   res.status(204).end();
 });
 
-// Sube la foto de un recibo, extrae texto con OCR y propone monto/categoría.
+// Sube la foto de un recibo, la prepara, extrae texto con OCR y propone comercio, monto y categoría.
+// La respuesta es solo una propuesta: el cliente debe confirmarla antes de guardar.
 router.post('/scan', uploadReceipt, async (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: 'Debes adjuntar una imagen del recibo (jpg, png o webp)' });
   }
 
+  let image;
   try {
-    const text = await recognizeReceipt(req.file.buffer);
-    const { amount, description, rawText } = parseReceipt(text);
-    res.json({
-      amount,
-      type: 'EXPENSE',
-      description,
-      category: categorize(rawText),
-      rawText,
-    });
+    image = await prepareReceiptImage(req.file.buffer);
+  } catch {
+    return res.status(422).json({ error: 'No pudimos leer la imagen. Intenta con otra foto.' });
+  }
+
+  try {
+    const ocr = await recognizeReceipt(image);
+    res.json({ type: 'EXPENSE', ...parseReceipt(ocr) });
   } catch {
     res.status(500).json({ error: 'No se pudo procesar la imagen del recibo' });
   }
