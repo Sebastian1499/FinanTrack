@@ -21,9 +21,11 @@ model User {
   goals        Goal[]
 }
 
+// type: "INCOME" (ingreso) o "EXPENSE" (egreso). Los registros previos quedan como EXPENSE.
 model Transaction {
   id          Int      @id @default(autoincrement())
   amount      Float
+  type        String   @default("EXPENSE")
   category    String
   description String
   date        DateTime @default(now())
@@ -34,12 +36,22 @@ model Transaction {
 }
 
 model Goal {
-  id           Int      @id @default(autoincrement())
+  id           Int          @id @default(autoincrement())
   name         String
   targetAmount Float
   targetDate   DateTime
-  savedAmount  Float    @default(0)
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  savedAmount  Float        @default(0)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       Int
-  createdAt    DateTime @default(now())
+  createdAt    DateTime     @default(now())
+  savings      GoalSaving[]
+}
+
+model GoalSaving {
+  id        Int      @id @default(autoincrement())
+  amount    Float
+  date      DateTime @default(now())
+  goal      Goal     @relation(fields: [goalId], references: [id], onDelete: Cascade)
+  goalId    Int
+  createdAt DateTime @default(now())
 }

@@ -79,6 +79,79 @@ describe('PATCH /api/goals/:id', () => {
   });
 });
 
+describe('Ahorros de metas', () => {
+  async function createGoal(token, targetAmount = 1000000) {
+    const created = await request(app)
+      .post('/api/goals')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ name: 'Meta', targetAmount, targetDate: monthsFromNow(4) });
+    return created.body.goal;
+  }
+
+  it('registra un ahorro, suma el total y aparece en el historial', async () => {
+    const { token } = await createUserAndToken();
+    const goal = await createGoal(token);
+
+    const res = await request(app)
+      .post(`/api/goals/${goal.id}/savings`)
+      .set('Authorization', `Bearer ${token}`)
+      .send({ amount: 200000, date: '2026-01-15' });
+
+    expect(res.status).toBe(201);
+    expect(res.body.goal.savedAmount).toBe(200000);
+    expect(res.body.goal.remaining).toBe(800000);
+    expect(res.body.goal.progress).toBeCloseTo(20, 5);
+    expect(res.body.goal.savings).toHaveLength(1);
+    expect(res.body.goal.savings[0].amount).toBe(200000);
+
+    const list = await request(app).get('/api/goals').set('Authorization', `Bearer ${token}`);
+    expect(list.body.goals[0].savings).toHaveLength(1);
+  });
+
+  it('elimina un ahorro y descuenta el monto de la meta', async () => {
+    const { token } = await createUserAndToken();
+    const goal = await createGoal(token);
+
+    const added = await request(app)
+      .post(`/api/goals/${goal.id}/savings`)
+      .set('Authorization', `Bearer ${token}`)
+      .send({ amount: 150000 });
+    const savingId = added.body.goal.savings[0].id;
+
+    const res = await request(app)
+      .delete(`/api/goals/${goal.id}/savings/${savingId}`)
+      .set('Authorization', `Bearer ${token}`);
+    expect(res.status).toBe(204);
+
+    const list = await request(app).get('/api/goals').set('Authorization', `Bearer ${token}`);
+    expect(list.body.goals[0].savedAmount).toBe(0);
+    expect(list.body.goals[0].savings).toHaveLength(0);
+  });
+
+  it('rechaza un ahorro con monto no positivo', async () => {
+    const { token } = await createUserAndToken();
+    const goal = await createGoal(token);
+
+    const res = await request(app)
+      .post(`/api/goals/${goal.id}/savings`)
+      .set('Authorization', `Bearer ${token}`)
+      .send({ amount: 0 });
+    expect(res.status).toBe(400);
+  });
+
+  it('no permite registrar ahorros en metas de otro usuario (previene IDOR)', async () => {
+    const userA = await createUserAndToken();
+    const userB = await createUserAndToken();
+    const goal = await createGoal(userA.token);
+
+    const res = await request(app)
+      .post(`/api/goals/${goal.id}/savings`)
+      .set('Authorization', `Bearer ${userB.token}`)
+      .send({ amount: 1000 });
+    expect(res.status).toBe(404);
+  });
+});
+
 describe('DELETE /api/goals/:id', () => {
   it('elimina una meta propia', async () => {
     const { token } = await createUserAndToken();

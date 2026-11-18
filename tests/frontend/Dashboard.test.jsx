@@ -31,10 +31,30 @@ describe('Dashboard', () => {
       </MemoryRouter>,
     );
 
-    await waitFor(() => expect(screen.getByText(/\$\s?100\.000/)).toBeInTheDocument());
-    expect(screen.getByText('2')).toBeInTheDocument(); // cantidad de transacciones
+    await waitFor(() => expect(screen.getAllByText(/\$\s?100\.000/).length).toBeGreaterThan(0));
+    expect(screen.getByText('Egresos totales')).toBeInTheDocument();
     expect(screen.getAllByText('Alimentación').length).toBeGreaterThan(0);
     expect(screen.getAllByText('Transporte').length).toBeGreaterThan(0);
+  });
+
+  it('suma los ingresos al balance y resta los egresos', async () => {
+    api.getTransactions.mockResolvedValue({
+      transactions: [
+        { id: 1, amount: 300000, type: 'INCOME', category: 'Otro', description: 'Salario', date: '2026-01-01' },
+        { id: 2, amount: 100000, type: 'EXPENSE', category: 'Transporte', description: 'Taxi', date: '2026-01-02' },
+      ],
+    });
+    api.getGoals.mockResolvedValue({ goals: [] });
+
+    render(
+      <MemoryRouter>
+        <Dashboard />
+      </MemoryRouter>,
+    );
+
+    await waitFor(() => expect(screen.getByText('Balance total').parentElement).toHaveTextContent('200.000'));
+    expect(screen.getByText('Ingresos totales').parentElement).toHaveTextContent('300.000');
+    expect(screen.getByText('Egresos totales').parentElement).toHaveTextContent('100.000');
   });
 
   it('muestra un mensaje cuando no hay transacciones', async () => {

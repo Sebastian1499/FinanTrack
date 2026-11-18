@@ -49,6 +49,40 @@ describe('POST /api/transactions', () => {
   });
 });
 
+describe('Tipo de movimiento (ingreso/egreso)', () => {
+  it('por defecto el movimiento es EGRESO', async () => {
+    const { token } = await createUserAndToken();
+    const res = await request(app)
+      .post('/api/transactions')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ amount: 5000, description: 'Taxi' });
+
+    expect(res.status).toBe(201);
+    expect(res.body.transaction.type).toBe('EXPENSE');
+  });
+
+  it('guarda un ingreso cuando se envía type INCOME', async () => {
+    const { token } = await createUserAndToken();
+    const res = await request(app)
+      .post('/api/transactions')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ amount: 3000000, description: 'Salario', type: 'INCOME' });
+
+    expect(res.status).toBe(201);
+    expect(res.body.transaction.type).toBe('INCOME');
+  });
+
+  it('rechaza un tipo de movimiento inválido con 400', async () => {
+    const { token } = await createUserAndToken();
+    const res = await request(app)
+      .post('/api/transactions')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ amount: 100, description: 'Algo', type: 'TRANSFER' });
+
+    expect(res.status).toBe(400);
+  });
+});
+
 describe('GET /api/transactions', () => {
   it('solo devuelve las transacciones del usuario autenticado (aislamiento entre usuarios)', async () => {
     const userA = await createUserAndToken();

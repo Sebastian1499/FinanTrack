@@ -13,6 +13,7 @@ const loginSchema = z.object({
 
 const transactionSchema = z.object({
   amount: z.coerce.number().positive('El monto debe ser mayor a 0').finite(),
+  type: z.enum(['INCOME', 'EXPENSE'], { message: 'El tipo debe ser Ingreso o Egreso' }).default('EXPENSE'),
   description: z.string().trim().min(1, 'La descripción es obligatoria').max(300),
   category: z.string().trim().max(50).optional(),
   date: z.coerce.date().optional(),
@@ -29,6 +30,11 @@ const goalUpdateSchema = z.object({
   savedAmount: z.coerce.number().min(0, 'El monto ahorrado no puede ser negativo').finite(),
 });
 
+const goalSavingSchema = z.object({
+  amount: z.coerce.number().positive('El ahorro debe ser mayor a 0').finite(),
+  date: z.coerce.date().optional(),
+});
+
 const chatSchema = z.object({
   message: z.string().trim().min(1, 'El mensaje no puede estar vacío').max(1000),
   history: z
@@ -43,5 +49,6 @@ module.exports = {
   transactionSchema,
   goalSchema,
   goalUpdateSchema,
+  goalSavingSchema,
   chatSchema,
 };

@@ -34,6 +34,10 @@ export const api = {
   createGoal: (token, payload) => request('/goals', { method: 'POST', body: payload, token }),
   updateGoal: (token, id, payload) => request(`/goals/${id}`, { method: 'PATCH', body: payload, token }),
   deleteGoal: (token, id) => request(`/goals/${id}`, { method: 'DELETE', token }),
+  addGoalSaving: (token, goalId, payload) =>
+    request(`/goals/${goalId}/savings`, { method: 'POST', body: payload, token }),
+  deleteGoalSaving: (token, goalId, savingId) =>
+    request(`/goals/${goalId}/savings/${savingId}`, { method: 'DELETE', token }),
 
   sendChatMessage: (token, message, history) =>
     request('/chat', { method: 'POST', body: { message, history }, token, timeout: 25000 }),

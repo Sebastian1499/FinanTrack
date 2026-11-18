@@ -1,11 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useAuth } from '../../context/useAuth';
 import { api } from '../../api/client';
+import { formatCOP, formatDate, isIncome, TYPE_LABELS } from '../utils/format';
 
-const formatCOP = (amount) =>
-  amount.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 });
-
-const EMPTY_FORM = { amount: '', description: '', category: '' };
+const EMPTY_FORM = { type: 'EXPENSE', amount: '', description: '', category: '' };
 
 export default function Transactions() {
   const { token } = useAuth();
@@ -33,6 +31,7 @@ export default function Transactions() {
     try {
       await api.createTransaction(token, {
         amount: Number(form.amount),
+        type: form.type,
         description: form.description,
         category: form.category || undefined,
       });
@@ -50,71 +49,109 @@ export default function Transactions() {
 
   return (
     <div className="transactions-page">
-      <h1>Transacciones</h1>
+      <header className="page-header">
+        <h1>Transacciones</h1>
+        <p className="page-header__subtitle">Registra ingresos y egresos. Los ingresos suman al balance y los egresos lo restan.</p>
+      </header>
 
-      <form className="transaction-form" onSubmit={handleSubmit}>
-        <input
-          type="number"
-          name="amount"
-          placeholder="Monto"
-          value={form.amount}
-          onChange={handleChange}
-          min="0"
-          step="0.01"
-          required
-        />
-        <input
-          type="text"
-          name="description"
-          placeholder="Descripción (ej. Almuerzo en restaurante)"
-          value={form.description}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="text"
-          name="category"
-          placeholder="Categoría (opcional, se autodetecta)"
-          value={form.category}
-          onChange={handleChange}
-        />
-        <button type="submit" className="btn btn--primary" disabled={saving}>
-          {saving ? 'Guardando…' : 'Agregar'}
-        </button>
-      </form>
+      <section className="panel">
+        <form className="transaction-form" onSubmit={handleSubmit}>
+          <label className="field">
+            <span>Tipo de movimiento</span>
+            <select name="type" value={form.type} onChange={handleChange} required>
+              <option value="INCOME">Ingreso</option>
+              <option value="EXPENSE">Egreso</option>
+            </select>
+          </label>
+          <label className="field">
+            <span>Monto</span>
+            <input
+              type="number"
+              name="amount"
+              placeholder="Monto"
+              value={form.amount}
+              onChange={handleChange}
+              min="0"
+              step="0.01"
+              required
+            />
+          </label>
+          <label className="field field--wide">
+            <span>Descripción</span>
+            <input
+              type="text"
+              name="description"
+              placeholder="Ej. Almuerzo en restaurante"
+              value={form.description}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label className="field">
+            <span>Categoría</span>
+            <input
+              type="text"
+              name="category"
+              placeholder="Opcional, se autodetecta"
+              value={form.category}
+              onChange={handleChange}
+            />
+          </label>
+          <button type="submit" className="btn btn--primary" disabled={saving}>
+            {saving ? 'Guardando…' : 'Agregar movimiento'}
+          </button>
+        </form>
+      </section>
 
-      {loading ? (
-        <p>Cargando transacciones…</p>
-      ) : transactions.length === 0 ? (
-        <p>No tienes transacciones registradas todavía.</p>
-      ) : (
-        <table className="transactions-table">
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>Descripción</th>
-              <th>Categoría</th>
-              <th>Monto</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {transactions.map((t) => (
-              <tr key={t.id}>
-                <td>{new Date(t.date).toLocaleDateString('es-CO')}</td>
-                <td>{t.description}</td>
-                <td>{t.category}</td>
-                <td>{formatCOP(t.amount)}</td>
-                <td>
-                  <button type="button" className="link-button" onClick={() => handleDelete(t.id)}>
-                    Eliminar
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+      <section className="panel">
+        {loading ? (
+          <p className="panel__empty">Cargando transacciones…</p>
+        ) : transactions.length === 0 ? (
+          <p className="panel__empty">No tienes transacciones registradas todavía.</p>
+        ) : (
+          <div className="table-wrap">
+            <table className="data-table transactions-table">
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Descripción</th>
+                  <th>Categoría</th>
+                  <th>Tipo</th>
+                  <th>Valor</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {transactions.map((t) => {
+                  const income = isIncome(t);
+                  return (
+                    <tr key={t.id}>
+                      <td data-label="Fecha">{formatDate(t.date)}</td>
+                      <td data-label="Descripción">{t.description}</td>
+                      <td data-label="Categoría">{t.category}</td>
+                      <td data-label="Tipo">
+                        <span className={`badge ${income ? 'badge--income' : 'badge--expense'}`}>
+                          {income ? TYPE_LABELS.INCOME : TYPE_LABELS.EXPENSE}
+                        </span>
+                      </td>
+                      <td data-label="Valor" className={income ? 'amount amount--income' : 'amount amount--expense'}>
+                        {income ? '+ ' : '- '}
+                        {formatCOP(t.amount)}
+                      </td>
+                      <td className="data-table__actions">
+                        <button type="button" className="link-button" onClick={() => handleDelete(t.id)}>
+                          Eliminar
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </section>
     </div>
   );
 }
+

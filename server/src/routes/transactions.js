@@ -39,11 +39,12 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', validateBody(transactionSchema), async (req, res) => {
-  const { amount, description, category, date } = req.body;
+  const { amount, type, description, category, date } = req.body;
 
   const transaction = await prisma.transaction.create({
     data: {
       amount,
+      type,
       description,
       category: category || categorize(description),
       date,
@@ -78,6 +79,7 @@ router.post('/scan', uploadReceipt, async (req, res) => {
     const { amount, description, rawText } = parseReceipt(text);
     res.json({
       amount,
+      type: 'EXPENSE',
       description,
       category: categorize(rawText),
       rawText,

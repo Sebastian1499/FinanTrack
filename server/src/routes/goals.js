@@ -2,7 +2,7 @@ const { Router } = require('express');
 const prisma = require('../lib/prisma');
 const auth = require('../middleware/auth');
 const { validateBody } = require('../middleware/validate');
-const { goalSchema, goalUpdateSchema } = require('../lib/schemas');
+const { goalSchema, goalUpdateSchema, goalSavingSchema } = require('../lib/schemas');
 
 const router = Router();
 router.use(auth);
@@ -14,13 +14,15 @@ function withPlan(goal) {
     Math.ceil((new Date(goal.targetDate) - now) / (1000 * 60 * 60 * 24 * 30)),
   );
   const remaining = Math.max(0, goal.targetAmount - goal.savedAmount);
-  return { ...goal, monthsLeft, monthlySavingNeeded: remaining / monthsLeft };
+  const progress = goal.targetAmount > 0 ? Math.min(100, (goal.savedAmount / goal.targetAmount) * 100) : 0;
+  return { ...goal, monthsLeft, monthlySavingNeeded: remaining / monthsLeft, remaining, progress };
 }
 
 router.get('/', async (req, res) => {
   const goals = await prisma.goal.findMany({
     where: { userId: req.userId },
     orderBy: { targetDate: 'asc' },
+    include: { savings: { orderBy: { date: 'desc' } } },
   });
   res.json({ goals: goals.map(withPlan) });
 });
@@ -69,6 +71,58 @@ router.delete('/:id', async (req, res) => {
     return res.status(404).json({ error: 'Meta no encontrada' });
   }
   await prisma.goal.delete({ where: { id } });
+  res.status(204).end();
+});
+
+// Registra un ahorro con su fecha y suma el monto al total de la meta.
+router.post('/:id/savings', validateBody(goalSavingSchema), async (req, res) => {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id)) {
+    return res.status(400).json({ error: 'Id inválido' });
+  }
+
+  const goal = await prisma.goal.findUnique({ where: { id } });
+  if (!goal || goal.userId !== req.userId) {
+    return res.status(404).json({ error: 'Meta no encontrada' });
+  }
+
+  const { amount, date } = req.body;
+  const [, updated] = await prisma.$transaction([
+    prisma.goalSaving.create({ data: { amount, date, goalId: id } }),
+    prisma.goal.update({
+      where: { id },
+      data: { savedAmount: { increment: amount } },
+      include: { savings: { orderBy: { date: 'desc' } } },
+    }),
+  ]);
+  res.status(201).json({ goal: withPlan(updated) });
+});
+
+// Elimina un ahorro del historial y descuenta su monto de la meta.
+router.delete('/:id/savings/:savingId', async (req, res) => {
+  const id = Number(req.params.id);
+  const savingId = Number(req.params.savingId);
+  if (!Number.isInteger(id) || !Number.isInteger(savingId)) {
+    return res.status(400).json({ error: 'Id inválido' });
+  }
+
+  const goal = await prisma.goal.findUnique({ where: { id } });
+  if (!goal || goal.userId !== req.userId) {
+    return res.status(404).json({ error: 'Meta no encontrada' });
+  }
+
+  const saving = await prisma.goalSaving.findUnique({ where: { id: savingId } });
+  if (!saving || saving.goalId !== id) {
+    return res.status(404).json({ error: 'Ahorro no encontrado' });
+  }
+
+  await prisma.$transaction([
+    prisma.goalSaving.delete({ where: { id: savingId } }),
+    prisma.goal.update({
+      where: { id },
+      data: { savedAmount: Math.max(0, goal.savedAmount - saving.amount) },
+    }),
+  ]);
   res.status(204).end();
 });
 
